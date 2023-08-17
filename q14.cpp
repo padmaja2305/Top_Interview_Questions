@@ -1,10 +1,13 @@
 class Solution {
 public:
     string reverseWords(string s) {
-        string result;
-        int i =0;
+        int count =0;
         int n = s.length();
-        //without using substring function
         
+        for(int i =0;i<n-1;i++){
+            if(s[i] == " ")
+                count++;
+                s[i]
+        }
     }
 };
