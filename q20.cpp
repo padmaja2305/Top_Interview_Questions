@@ -4,22 +4,34 @@ public:
         int n = nums.size();
         vector<vector<int>> result;
         for(int i=0;i<n;i++){
-            for(int j=i+1;j<n;j++){
-                for(int k=j+1;k<n;k++){
-                    if(nums[i]+nums[j]+nums[k]==0){
-                        vector<int> temp;
-                        temp.push_back(nums[i]);
-                        temp.push_back(nums[j]);
-                        temp.push_back(nums[k]);
-                        result.push_back(temp);
-                    }
-                    k++;
+            sort(nums.begin(),nums.end());
+            int target = -nums[i];
+            int front = i+1;
+            int back = n-1;
+            while(front<back){
+                if(nums[front]+nums[back]<target){
+                    front++;
+                }
+                else if(nums[front]+nums[back]>target){
+                    back--;
+                }
+                else{
+                    vector<int> triplet(3,0);
+                    triplet[0] = nums[i];
+                    triplet[1] = nums[front];
+                    triplet[2] = nums[back];
+                    result.push_back(triplet);
+                    while(front<back && nums[front]==triplet[1]) front++;
+                    while(front<back && nums[back]==triplet[2]) back--;
+                }
 
-                }   
-                j++;
+
             }
-            i++;
+            while(i+1<n && nums[i+1]==nums[i]) i++;
+
         }
         return result;
+
+
     }
-};
+};  
